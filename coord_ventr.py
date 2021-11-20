@@ -3,6 +3,7 @@ import numpy as np
 import math
 import sympy
 from sympy import Symbol, solve, nsolve
+from scipy.optimize import fsolve
 
 
 img = cv2.imread('images/p.png')
@@ -39,7 +40,7 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
 
         # find distance between points of valve ring
         r = round(math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2), 2)
-        print(r)
+        print('Расстояние между точками', r)
 
         # find equation of line of valve ring
         k = Symbol('k')
@@ -58,10 +59,14 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
         cv2.circle(img, (int(xc), int(yc)), 3, (150, 100, 200), -1)
 
         # find center of electrode system - don't work yet
-        eq5 = -(1/k_) * x - y + b_
-        eq6 = (x - xc) ** 2 + (y - yc) ** 2 - 23 ** 2
-        xce, yce = nsolve((eq5, eq6), (x, y), (1, 1))
-        cv2.circle(img, (int(xce), int(yce)), 23, (50, 255, 170), 2)
+        alpha = math.asin((x2 - xc)/(r/2))
+        betta = 1.5708 - alpha
+        xce = 23* math.sin(betta)
+        yce = 23* math.cos(betta)
+        cv2.circle(img, (int(xc + xce), int(yc - yce)), 3, (0, 250, 200), -1)
+
+
+
 
 
 
