@@ -57,12 +57,16 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
         xc, yc = nsolve((eq3, eq4), (x, y), (1, 1))
         cv2.circle(img, (int(xc), int(yc)), 3, (150, 100, 200), -1)
 
+        # find center of electrode system - don't work yet
+        eq5 = -(1/k_) * x - y + b_
+        eq6 = (x - xc) ** 2 + (y - yc) ** 2 - 23 ** 2
+        xce, yce = nsolve((eq5, eq6), (x, y), (1, 1))
+        cv2.circle(img, (int(xce), int(yce)), 23, (50, 255, 170), 2)
+
+
 
 cv2.namedWindow("image")
 cv2.setMouseCallback("image", on_EVENT_LBUTTONDOWN)
-
-
-#eq3 = -(1/0.64)*x - y + 66.2
 
 cv2.imshow("image", img)
 cv2.waitKey(0)
