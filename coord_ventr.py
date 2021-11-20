@@ -1,9 +1,6 @@
 import cv2
-import numpy as np
 import math
-import sympy
-from sympy import Symbol, solve, nsolve
-from scipy.optimize import fsolve
+from sympy import Symbol, nsolve
 
 
 img = cv2.imread('images/p.png')
