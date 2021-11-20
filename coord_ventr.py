@@ -58,7 +58,7 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
         xc, yc = nsolve((eq3, eq4), (x, y), (1, 1))
         cv2.circle(img, (int(xc), int(yc)), 3, (150, 100, 200), -1)
 
-        # find center of electrode system - don't work yet
+        # find center of electrode system
         alpha = math.asin((x2 - xc)/(r/2))
         betta = 1.5708 - alpha
         xce = 23* math.sin(betta)
